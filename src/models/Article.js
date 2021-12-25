@@ -14,4 +14,6 @@ const ArticleSchema = new Schema({
   events: Array
 });
 
+ArticleSchema.index({title: 'text'});
+
 export default model('Article', ArticleSchema);
