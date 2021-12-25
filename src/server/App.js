@@ -4,16 +4,14 @@ import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import Router from 'express'
-const route = Router();
-
 import routes from "../router/routes";
-import NodeCron from "../config/CronDataArticle";
+import CronArticle from "../config/CronDataArticle";
 import ScriptInsertData from "../config/ScriptInsertData";
 
 class App {
   constructor() {
-    NodeCron();
+    CronArticle.start();
+
     this.server = express();
 
     this.middlewares();

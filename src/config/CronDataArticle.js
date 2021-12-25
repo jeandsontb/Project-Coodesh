@@ -1,14 +1,15 @@
-import nodeCron from "node-cron";
+import { CronJob } from "cron"; 
 
-const NodeCron = () => {
-
-  nodeCron.schedule('0 9 * * *', () => {
+const CronArticle = new CronJob('*/5 * * * * *', () => {
     console.log('Executando uma tarefa a cada minuto');
 
-    
-  })
-}
+    const apiUrl = `https://api.spaceflightnewsapi.net/v3/articles`;
+    let countInsertion = apiUrl.length
 
-export default NodeCron;
+    console.log(countInsertion);
+  });
+
+export default CronArticle;
+
 
 //0 0 * * * * Diariamente à meia-noite

@@ -1,7 +1,7 @@
 import fetch from "cross-fetch";
 import Article from "../models/Article";
 
-const ScriptInsertData = async () => {
+const ScriptInsertData = async () => { 
   const apiUrl = `https://api.spaceflightnewsapi.net/v3/articles`;
   let countInsertion = apiUrl.length;
   let countInformationinsert = 1;
