@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/shared/index.js",
-    "poc": "nodemon ./src/poc.js"
+    "cron": "nodemon ./src/config/CronDataArticle.js"
   },
   "keywords": [],
   "author": "",
