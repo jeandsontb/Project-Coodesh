@@ -3,11 +3,10 @@ import { CronJob } from "cron";
 
 import Article from "../models/Article";
 
-const CronArticle = new CronJob('*/10 * * * * *', async () => {
+const CronArticle = new CronJob('0 0 9 * * *', async () => {
 
     let countInsertionBefore = await Article.count({ id: {$gt: 0} });
     const { id } = await Article.findOne({ id: {$gt: 0} }).sort({ id: -1 });
-
     
     const apiUrl = `https://api.spaceflightnewsapi.net/v3/articles`;
     let countInsertionAfter = apiUrl.length;
