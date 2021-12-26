@@ -14,6 +14,9 @@ const CronArticle = new CronJob('0 0 9 * * *', async () => {
     const getDataArticlesApi = await fetch(`${apiUrl}?_limit=${apiUrl.length}`);
     const response = await getDataArticlesApi.json();
 
+    // console.log(countInsertionAfter);
+    // console.log(countInsertionBefore);
+
     if( getDataArticlesApi.status >= 400 ) {
       throw new Error('Erro na requisição');
     }
