@@ -5,7 +5,7 @@ import ContentArticles from '../components/ContentArticles';
 import Header from '../components/Header';
 import { theme } from '../styles/global';
 
-const Container = styled.body`
+const Container = styled.section`
   background-color: ${theme.colors.backgroundPrimary};
 `
 

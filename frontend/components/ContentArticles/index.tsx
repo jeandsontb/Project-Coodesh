@@ -1,33 +1,76 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import api from '../../service/api';
 
 import S from './styles';
+import { IArticlesDTO } from '../../Dtos/ArticlesDTO';
 
 const ContentArticles = () => {
+
+  const [loading, setLoading] = useState(false);
+  const [dataArticles, setDataArticles] = useState<IArticlesDTO[]>([]);
+
+  useEffect(() => {
+    getDataArticles();
+  }, []);
+
+  const getDataArticles = async () => {
+    const {data} = await api.get('/articles');
+
+    if(data) {
+      setDataArticles(data);
+    }
+    return;
+  }
+
   return (
     <S.Container>
       <S.BoxContent>
-        
-        <S.BoxCard>
-          <S.BoxImage>
-            <S.ImageCard src="https://ims.com.br/wp-content/uploads/2018/02/fotografia-espacial.jpg" />
-          </S.BoxImage>
-          <S.BoxDescription>
-            <S.TextTitle>Teneroe of di</S.TextTitle>
-            <S.BoxDateAndButton>
-              <S.TextData>10/23/2022</S.TextData>
-              <S.ButtonNewSite>
-                New Site
-              </S.ButtonNewSite>
-            </S.BoxDateAndButton>
-            <S.TextDescription>
-              dsafkljaçsf adsçlkf jaçlskfj açslfkjasç fkjlçak jfasçldkfj çasdlkfj asdfa asd fasdfkl jasçdflkja çsldkfjaçsfd kjasçdkfjçasdkjf asdfalksj fçakf af
-              asdfaksdfj klasjfdçaksdjf çaskfjaçsdklfjasçdkf jasçdkfja çsld
-            </S.TextDescription>
-            <S.ButtonShowPlus>
-              Ver Mais
-            </S.ButtonShowPlus>
-          </S.BoxDescription>
-        </S.BoxCard>
+
+      {dataArticles.length > 0 && dataArticles.map((item, index) => {
+
+        let verifyPositionCard = false;
+        if(index % 2 === 0) {
+          verifyPositionCard = true;
+        }
+
+        return (
+          <S.BoxCard key={item.id} verifyPosition={verifyPositionCard} >
+            <S.BoxImage>
+              <S.ImageCard src={item.imageUrl} />
+            </S.BoxImage>
+            <S.BoxDescription verifyPosition={verifyPositionCard}>
+              <S.TextTitle>
+                {item.title.substring(0, 70)}
+                {item.title.length > 70 ? '...' : '.'}
+              </S.TextTitle>
+              <S.BoxDateAndButton>
+                <S.TextData>{item.publishedAt} {verifyPositionCard}</S.TextData>
+                <S.ButtonNewSite>
+                  New Site
+                </S.ButtonNewSite>
+              </S.BoxDateAndButton>
+              <S.TextDescription>
+                {item.summary.substring(0, 180)}
+                {item.summary.length > 180 ? '...' : '.'}
+              </S.TextDescription>
+              <S.ButtonShowPlus>
+                Ver Mais
+              </S.ButtonShowPlus>
+            </S.BoxDescription>
+          </S.BoxCard>
+        )
+      })}
+
+      <S.BoxButtonLoad>
+        {loading &&
+          <S.IconloadArticles src='loading.gif' />
+        }
+
+        <S.ButtonPlusArticles>
+          Carregar Mais
+        </S.ButtonPlusArticles>
+      </S.BoxButtonLoad>     
+
       </S.BoxContent>
     </S.Container>
   );
