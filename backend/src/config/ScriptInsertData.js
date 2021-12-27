@@ -55,6 +55,9 @@ const ScriptInsertData = async () => {
         }        
       });  
     }      
+
+    return;
+    
   } catch ( e ) {
     console.error(e);
   }

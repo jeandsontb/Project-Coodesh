@@ -14,10 +14,13 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   colors: {
-    colorPrimary: '#302E53',
-    colorSecundary: '#1E2022',
-    colorActive: '#D07017',
-    backgroundPrimary: '#FFFFFF'
+    colorPrimary: 'rgba(48,46,83,1)',
+    colorPrimaryOpacity: 'rgba(48,46,83,0.5)',
+    colorSecundary: 'rgba(30,32,34,1)',
+    colorSecundaryopacity: 'rgba(30,32,34,0.5)',
+    colorActive: 'rgba(208,112,23,1)',
+    colorActiveOpacity: 'rgba(208,112,23,0.8)',
+    backgroundPrimary: 'rgba(248,248,255,1)'
   }
 }
 
