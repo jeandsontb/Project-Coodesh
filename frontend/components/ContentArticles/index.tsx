@@ -7,6 +7,7 @@ import { IArticlesDTO } from '../../Dtos/ArticlesDTO';
 const ContentArticles = () => {
 
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState<number>(1)
   const [dataArticles, setDataArticles] = useState<IArticlesDTO[]>([]);
 
   useEffect(() => {
@@ -21,6 +22,23 @@ const ContentArticles = () => {
     }
     return;
   }
+
+  const handleLoadPlusArticles = async (page: number) => {
+
+    setLoading(true);
+    let count = page + 1;
+
+    const {data} = await api.get(`/articles?_page=${count}`);
+    if(data) {
+      setPageLoading(count);
+      setLoading(false);
+      setDataArticles(oldArticles => [
+        ...oldArticles,
+        ...data
+      ]);
+    }
+  }
+
 
   return (
     <S.Container>
@@ -66,7 +84,7 @@ const ContentArticles = () => {
           <S.IconloadArticles src='loading.gif' />
         }
 
-        <S.ButtonPlusArticles>
+        <S.ButtonPlusArticles onClick={() => handleLoadPlusArticles(pageLoading)}>
           Carregar Mais
         </S.ButtonPlusArticles>
       </S.BoxButtonLoad>     
