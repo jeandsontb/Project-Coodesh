@@ -40,8 +40,8 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
           setButtonSearch(false);
           return;
         }
-          setBoxInformation(true);
-          setLoading(false);
+        setBoxInformation(true);
+        setLoading(false);
       }
       getSearchArticles();
     } else {

@@ -16,9 +16,7 @@ const Header = ({ openSearch, sendListOrderArticles }: ISearchHeaderPropsDTO) =>
   }
 
   const handleSearchArticleButton = () => {
-    if(search) {
-      openSearch(search);
-    }
+    openSearch(search);
   }
 
   const handleVisibleButtonsSelectorOrder = () => {
