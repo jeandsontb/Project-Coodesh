@@ -15,6 +15,8 @@
   <img alt="PROJECT" title="#PROJECT" src="https://raw.githubusercontent.com/jeandsontb/Project-Coodesh/main/Screen/challenge01.png" width="400px">
 </p>
 
+# [Confira aqui o vídeo explicativo desse projeto](https://www.loom.com/embed/e378ab52b21f49269bde078b29365e16)
+
 ## 💻 Sobre o Projeto
 
 Esso projeto faz parte de um desafio para verificar o meu nível de conhecimento, para o Backend essa aplicação utilizei o banco de dados MongoDB, e para o bom funcionamento dessa aplicação tive de desenvolver um script para alimentar o banco de dados a partir de uma API, desenvolver outro script para verificar atualizações diárias e popular na base de dados e também criar as rotas para listagens das informações, filtragem por nome e ordenação por data de inclusão. Para o Frontend desenvolvi a aplicação utilizando o Next.js, React.js, Styled-Components, Tailwind CSS, essa aplicação tem por objetivo mostrar as informações consumidas do Backend, buscar posts por algum nome constante no título, selecionar opções de ordenação, o layout foi mais um desafio de criação, também implementei responsividade nessa aplicação.
