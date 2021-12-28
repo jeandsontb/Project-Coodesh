@@ -15,5 +15,4 @@ export default {
     font-size: 28px;
     color: ${theme.colors.colorPrimary};
   `,
-
 }

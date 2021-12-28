@@ -10,12 +10,14 @@ const Header = ({ openSearch, sendListOrderArticles }: ISearchHeaderPropsDTO) =>
   const [ visible, setVisible ] = useState<boolean>(false);
 
   const handleSearchArticle = (event: KeyboardEvent<HTMLInputElement>) => {
-    if(event.key === 'Enter') {
+    if(event.key === 'Enter') {      
+      setSearch('');
       openSearch(search);
     }
   }
 
   const handleSearchArticleButton = () => {
+    setSearch('');
     openSearch(search);
   }
 

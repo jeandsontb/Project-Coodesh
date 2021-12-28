@@ -6,7 +6,8 @@ import Header from '../components/Header';
 import { theme } from '../styles/global';
 
 const Container = styled.section`
-  background-color: ${theme.colors.backgroundPrimary};
+  background-color: ${theme.colors.backgroundPrimary}; 
+  min-height: 100vh; 
 `
 
 const Home = () => {

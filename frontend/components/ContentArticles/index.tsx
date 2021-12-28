@@ -15,22 +15,26 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
   const [buttonSearch, setButtonSearch] = useState<boolean>(true);
   const [boxInformation, setBoxInformation] = useState<boolean>(false);
 
-  useEffect(() => {
+  useEffect(() => {    
     getDataArticles();
   }, []);
 
   const getDataArticles = async () => {
+    setLoading(true);
     const {data} = await api.get(`/articles?_page=${pageLoading}&_order=${lisOrderSearch}`);
     if(data) {
+      setLoading(false);
       setDataArticles(data);
     }
     return;
   }
 
+  // Call for search by input field
   useEffect(() => {
-    if(sendSearch.length > 2) {
-      setLoading(true);
-      setDataArticles([]);
+    if(sendSearch.length > 3) {
+        setLoading(true);
+        setDataArticles([]);
+
       const getSearchArticles = async () => {
         const {data} = await api.get(`/articles/${sendSearch}`);
         if(data.length > 0) {
@@ -42,40 +46,34 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
         }
         setBoxInformation(true);
         setLoading(false);
+        return;
       }
-      getSearchArticles();
-    } else {
-      setButtonSearch(true);
-      getDataArticles();
-      setBoxInformation(false);
+    getSearchArticles();
+    return;
     }
+    getDataArticles();
   }, [sendSearch]);
 
-  useEffect(() => {
-    const getOrderSelectedArticle = async () => {
-      setLoading(true);
-      setDataArticles([]);
-      let list = 1;
-      if(sendListOrder === 'asc') {
-        const {data} = await api.get(`/articles?_page=${pageLoading}&_order=${list}`);
-        if(data) {
-          setLoading(false);
-          setListOrderSearch(1)
-          setDataArticles(data);
-          return;
-        }
+  // Call to list the articles in the selected order
+  useEffect(() => { 
+    setLoading(true);
+    setDataArticles([]);
+    const getOrderSelectedArticle = async () => {    
+      if(sendListOrder === 'dec') {
+        setPageLoading(1);
+        setListOrderSearch(-1);
+        return;
       }
-      const {data} = await api.get(`/articles?_page=${pageLoading}&_order=${lisOrderSearch}`);
-        if(data) {
-          setLoading(false);
-          setListOrderSearch(1)
-          setDataArticles(data);
-          return;
-        }
-    }
-    
-    getOrderSelectedArticle();
-  }, [sendListOrder]);
+  
+      if(sendListOrder === 'asc') {
+        setPageLoading(1);
+        setListOrderSearch(1);
+        return;
+      }
+    }    
+    getOrderSelectedArticle();    
+    getDataArticles();
+  }, [sendListOrder, lisOrderSearch]);
 
   const handleLoadPlusArticles = async (page: number) => {
     setLoading(true);
@@ -95,12 +93,10 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
   return (
     <S.Container>
       <S.BoxContent>
-
       {boxInformation &&
         <BoxSearchInformation />
       }
       {dataArticles.length > 0 && dataArticles.map((item, index) => {
-
         let verifyPositionCard = false;
         if(index % 2 === 0) {
           verifyPositionCard = true;

@@ -17,6 +17,10 @@ export default {
   BoxContent: styled.div`
     width: 55%;
     padding: 50px 0;
+
+    @media(max-width: 1250px) {
+      width: 95%;
+    }
   `,
   BoxCard: styled.div<ICardProps>`
     display: flex;
