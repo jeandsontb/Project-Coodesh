@@ -10,6 +10,7 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
 
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState<number>(1)
+  const [lisOrderSearch, setListOrderSearch] = useState<number>(-1);
   const [dataArticles, setDataArticles] = useState<IArticlesDTO[]>([]);
   const [buttonSearch, setButtonSearch] = useState<boolean>(true);
   const [boxInformation, setBoxInformation] = useState<boolean>(false);
@@ -17,6 +18,14 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
   useEffect(() => {
     getDataArticles();
   }, []);
+
+  const getDataArticles = async () => {
+    const {data} = await api.get(`/articles?_page=${pageLoading}&_order=${lisOrderSearch}`);
+    if(data) {
+      setDataArticles(data);
+    }
+    return;
+  }
 
   useEffect(() => {
     if(sendSearch.length > 2) {
@@ -46,38 +55,33 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
     const getOrderSelectedArticle = async () => {
       setLoading(true);
       setDataArticles([]);
+      let list = 1;
       if(sendListOrder === 'asc') {
-        const {data} = await api.get(`/articles/?_order=-1`);
-        if(data.length > 0) {
+        const {data} = await api.get(`/articles?_page=${pageLoading}&_order=${list}`);
+        if(data) {
           setLoading(false);
+          setListOrderSearch(1)
           setDataArticles(data);
-        return;
+          return;
         }
       }
-      const {data} = await api.get(`/articles/?_order=1`);
-        if(data.length > 0) {
+      const {data} = await api.get(`/articles?_page=${pageLoading}&_order=${lisOrderSearch}`);
+        if(data) {
           setLoading(false);
+          setListOrderSearch(1)
           setDataArticles(data);
-        return;
+          return;
         }
     }
     
     getOrderSelectedArticle();
   }, [sendListOrder]);
 
-  const getDataArticles = async () => {
-    const {data} = await api.get('/articles');
-    if(data) {
-      setDataArticles(data);
-    }
-    return;
-  }
-
   const handleLoadPlusArticles = async (page: number) => {
     setLoading(true);
     let count = page + 1;
 
-    const {data} = await api.get(`/articles?_page=${count}`);
+    const {data} = await api.get(`/articles?_page=${count}&_order=${lisOrderSearch}`);
     if(data) {
       setPageLoading(count);
       setLoading(false);

@@ -10,7 +10,7 @@ class ShowAllArticles {
     let skip = limit * (page - 1);
 
     const dataArticle = await Article.find()
-                                      .sort({id: order})
+                                      .sort({publishedAt: order})
                                       .skip(skip)
                                       .limit(limit);
 

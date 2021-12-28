@@ -31,9 +31,7 @@ const Header = ({ openSearch, sendListOrderArticles }: ISearchHeaderPropsDTO) =>
       setVisible(false);
     }
   }
-
   
-
   return (
     <S.BoxContainer>
       <S.BoxHeader>
