@@ -15,7 +15,7 @@
   <img alt="PROJECT" title="#PROJECT" src="https://raw.githubusercontent.com/jeandsontb/Project-Coodesh/main/Screen/challenge01.png" width="400px">
 </p>
 
-## :heart_eyes: :wink: [Clique aqui para ver o vídeo explicativo do projeto](https://www.loom.com/embed/e378ab52b21f49269bde078b29365e16)
+## :heart_eyes: :wink: [Clique aqui para ver um vídeo, do que foi realizado nesse projeto](https://www.loom.com/embed/e378ab52b21f49269bde078b29365e16)
 
 ## 💻 Sobre o Projeto
 
