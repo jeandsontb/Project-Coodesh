@@ -19,7 +19,7 @@ export default {
     padding: 50px 0;
 
     @media(max-width: 1250px) {
-      width: 95%;
+      width: 85%;
     }
   `,
   BoxCard: styled.div<ICardProps>`
@@ -28,16 +28,27 @@ export default {
     flex-direction: ${({verifyPosition}) => verifyPosition ? 'row' : 'row-reverse'};
     height: 220px;
     margin-bottom: 60px;
+
+    @media(max-width: 768px) {
+      flex-direction: column;
+      height: 380px;
+    }
   `,
   BoxImage: styled.div`
     width: 280px;
     height: 220px;
     overflow: hidden;
     box-shadow: 2px 4px 5px ${theme.colors.colorSecundary};
+
+    @media(max-width: 768px) {
+      width: 100%;
+      height: 160px;
+    }
   `,
   ImageCard: styled.img`
     width: 100%;
     height: 100%;
+    object-fit: cover;
   `,
   BoxDescription: styled.div<ICardProps>`
     display: flex;
@@ -47,11 +58,22 @@ export default {
     flex-direction: column;
     margin-left: ${({verifyPosition}) => verifyPosition ? 40 : 0}px;
     margin-right: ${({verifyPosition}) => verifyPosition ? 0 : 40}px;
+
+    @media(max-width: 768px) {
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 20px;
+      height: auto;
+    }
   `,
   TextTitle: styled.h2`
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
     color: ${theme.colors.colorPrimary};
+
+    @media(max-width: 768px) {
+      font-size: 16px;
+    }
   `,
   BoxDateAndButton: styled.div`
     display: flex;
@@ -63,6 +85,9 @@ export default {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 14px;
     color: ${theme.colors.colorActive};
+  `,
+  LinkToRedirectSite: styled.a`
+    text-decoration: none;
   `,
   ButtonNewSite: styled.button`
     width: 80px;
@@ -82,6 +107,10 @@ export default {
   TextDescription: styled.p`
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 18px;
+
+    @media(max-width: 768px) {
+      font-size: 14px;
+    }
   `,
   ButtonShowPlus: styled.button`
     position: absolute;
@@ -98,6 +127,10 @@ export default {
 
     :hover {
       box-shadow: 0px 1px 2px ${theme.colors.colorPrimary};
+    }
+
+    @media(max-width: 768px) {
+      width: 100%;
     }
   `,
   BoxButtonLoad: styled.div`

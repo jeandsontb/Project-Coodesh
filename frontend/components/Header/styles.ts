@@ -20,6 +20,10 @@ export default {
     justify-content: flex-end;
     margin: 20px 5px 0 5px;
     height: 130px;
+
+    @media(max-width: 768px) {
+      flex-direction: column;
+    }
   `,
   BoxInput: styled.div`
     display: flex;
@@ -40,6 +44,10 @@ export default {
     height: 30px;
     border: none;
     outline: none;
+
+    @media(max-width: 768px) {
+      flex: 1;
+    }
   `,
   ButtonIconInput: styled.button`
     display: flex;
@@ -60,6 +68,12 @@ export default {
   BoxButtonsSelector: styled.div`
     display: flex;
     flex-direction: column;
+
+    @media(max-width: 768px) {
+      margin-top: 10px;
+      align-items: flex-end;
+      margin-right: 20px;
+    }
   `,
   BoxButtonSelector: styled.div`
     display: flex;

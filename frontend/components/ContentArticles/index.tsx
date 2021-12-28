@@ -24,6 +24,7 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
     const {data} = await api.get(`/articles?_page=${pageLoading}&_order=${lisOrderSearch}`);
     if(data) {
       setLoading(false);
+      setButtonSearch(true);
       setDataArticles(data);
     }
     return;
@@ -44,6 +45,7 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
           setButtonSearch(false);
           return;
         }
+        setButtonSearch(false);
         setBoxInformation(true);
         setLoading(false);
         return;
@@ -114,17 +116,17 @@ const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) 
               </S.TextTitle>
               <S.BoxDateAndButton>
                 <S.TextData>{dayjs(item.publishedAt).format('DD/MM/YYYY')}</S.TextData>
-                <S.ButtonNewSite>
-                  New Site
-                </S.ButtonNewSite>
+                <S.LinkToRedirectSite href={item.url} target="_blank">
+                  <S.ButtonNewSite>New Site</S.ButtonNewSite>
+                </S.LinkToRedirectSite>
               </S.BoxDateAndButton>
               <S.TextDescription>
                 {item.summary.substring(0, 180)}
                 {item.summary.length > 180 ? '...' : '.'}
               </S.TextDescription>
-              <S.ButtonShowPlus>
-                Ver Mais
-              </S.ButtonShowPlus>
+              <S.LinkToRedirectSite href={item.url} target="_blank">
+                <S.ButtonShowPlus>Ver Mais</S.ButtonShowPlus>
+              </S.LinkToRedirectSite>
             </S.BoxDescription>
           </S.BoxCard>
         )
