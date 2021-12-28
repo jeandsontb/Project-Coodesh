@@ -1,9 +1,39 @@
-import React from 'react';
-import { IconSearch } from '../Icons';
+import React, {useState, KeyboardEvent} from 'react';
 
+import { IconSearch, IconSelector } from '../Icons';
 import S from './styles';
+import { ISearchHeaderPropsDTO } from '../../Dtos/ArticlesDTO';
 
-const Header = () => {
+const Header = ({ openSearch, sendListOrderArticles }: ISearchHeaderPropsDTO) => {
+
+  const [ search, setSearch ] = useState<string>('');
+  const [ visible, setVisible ] = useState<boolean>(false);
+
+  const handleSearchArticle = (event: KeyboardEvent<HTMLInputElement>) => {
+    if(event.key === 'Enter') {
+      openSearch(search);
+    }
+  }
+
+  const handleSearchArticleButton = () => {
+    if(search) {
+      openSearch(search);
+    }
+  }
+
+  const handleVisibleButtonsSelectorOrder = () => {
+    setVisible(!visible);
+  }
+
+  const handleSelectOrderArticle = (info: string) => {
+    if(info) {
+      sendListOrderArticles(info);
+      setVisible(false);
+    }
+  }
+
+  
+
   return (
     <S.BoxContainer>
       <S.BoxHeader>
@@ -11,19 +41,41 @@ const Header = () => {
         <S.BoxForm>
 
           <S.BoxInput>
-            <S.InputSearch placeholder='Search' />
-            <S.BoxIconInput>
+            <S.InputSearch 
+              placeholder='Search' 
+              onKeyDown={handleSearchArticle} 
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            <S.ButtonIconInput onClick={handleSearchArticleButton}>
               <div>
                 <IconSearch />
               </div>
-            </S.BoxIconInput>
+            </S.ButtonIconInput>
           </S.BoxInput>
 
-          <S.InputSelect name="selectOrder">
-            <option disabled selected style={{display: 'none'}} >Sort</option>
-            <option value="dec" >Mais antigas</option>
-            <option value="asc" >Mais novas</option>
-          </S.InputSelect>
+          <S.BoxButtonsSelector>
+            <S.BoxButtonSelector>
+              <S.ButtonSelect onClick={handleVisibleButtonsSelectorOrder}>
+                Sort
+              </S.ButtonSelect>
+              <S.BoxIconSelect>
+                <IconSelector />
+              </S.BoxIconSelect>
+            </S.BoxButtonSelector>
+
+            {visible &&
+              <S.BoxGroupButtonsSelector>
+                <S.ButtonAscSelector onClick={() => handleSelectOrderArticle('asc')}>
+                  Mais Antigas
+                </S.ButtonAscSelector>
+                <S.ButtonDecSelector onClick={() => handleSelectOrderArticle('dec')}>
+                  Mais Novas
+                </S.ButtonDecSelector>
+              </S.BoxGroupButtonsSelector>
+            }
+          </S.BoxButtonsSelector>
+
         </S.BoxForm>
         
         <S.BoxLogoAndTitle>

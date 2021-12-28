@@ -17,3 +17,13 @@ export interface IArticlesDTO {
   updatedAt: Date
   url: string;
 }
+
+export interface ISearchHeaderPropsDTO {
+  openSearch: (search: string) => void;
+  sendListOrderArticles: (order: string) => void;
+}
+
+export interface IContentArticlesPropsDTO {
+  sendSearch: string;
+  sendListOrder: string;
+}

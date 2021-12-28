@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import ContentArticles from '../components/ContentArticles';
 
@@ -10,11 +10,15 @@ const Container = styled.section`
 `
 
 const Home = () => {
+
+  const [ searchHeader, setSearchHeader ] = useState('');
+  const [ orderListArticles, setOrderListArticles ] = useState('');
+
   return (
     <Container> 
-      <Header />
+      <Header openSearch={setSearchHeader} sendListOrderArticles={setOrderListArticles} />
 
-      <ContentArticles />
+      <ContentArticles sendSearch={searchHeader} sendListOrder={orderListArticles} />
     </Container>
   )
 }

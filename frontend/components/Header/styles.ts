@@ -17,9 +17,9 @@ export default {
   `,
   BoxForm: styled.div`
     display: flex;
-    flex: 1;
     justify-content: flex-end;
-    margin: 20px 5px;
+    margin: 20px 5px 0 5px;
+    height: 130px;
   `,
   BoxInput: styled.div`
     display: flex;
@@ -29,6 +29,7 @@ export default {
     background-color: ${theme.colors.backgroundPrimary};
     margin-right: 20px;
     border-radius: 5px;
+    max-height: 40px;
   `,
   InputSearch: styled.input`
     background-color: ${theme.colors.backgroundPrimary};
@@ -40,13 +41,15 @@ export default {
     border: none;
     outline: none;
   `,
-  BoxIconInput: styled.div`
+  ButtonIconInput: styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
     width: 30px;
     height: 30px;
     background-color: ${theme.colors.colorPrimary};
+    border: none;
+    cursor: pointer;
 
     div {
       width: 20px;
@@ -54,19 +57,72 @@ export default {
       color: ${theme.colors.backgroundPrimary};
     }
   `,
-  InputSelect: styled.select`
+  BoxButtonsSelector: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+  BoxButtonSelector: styled.div`
+    display: flex;
     width: 120px;
-    outline: none;
-    border: 1px solid ${theme.colors.colorPrimaryOpacity};
-    background-color: ${theme.colors.backgroundPrimary};
+    border: 1px solid ${theme.colors.colorPrimaryOpacity};    
     border-radius: 5px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+  `,
+  ButtonSelect: styled.button`    
     font-family: 'Roboto Condensed', sans-serif;
+    background-color: ${theme.colors.backgroundPrimary};
+    color: ${theme.colors.colorPrimary};
     font-size: 18px;
+    height: 40px;
+    flex: 1;
+    border: none;
+    cursor: pointer;
+  `,
+  BoxIconSelect: styled.div`
+    width: 20px;
+    height: 20px;
+    color: ${theme.colors.colorPrimary};
+  `,
+  BoxGroupButtonsSelector: styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 6px;
+  `,
+  ButtonAscSelector: styled.button`
+    width: 120px;
+    height: 40px;
+    background-color: ${theme.colors.backgroundPrimary};
+    border: 1px solid ${theme.colors.colorPrimaryOpacity};
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: ${theme.colors.colorPrimary};
+    font-size: 16px;    
+    cursor: pointer;
+    transition: all ease 0.3s;
 
-    option {
-      margin: 15px;
-      border: 1px solid teal;
-      border:1px solid #ccc;    
+    :hover {
+      box-shadow: 0px -1px 2px ${theme.colors.colorPrimary};
+    }
+  `,
+  ButtonDecSelector: styled.button`
+    width: 120px;
+    height: 40px;
+    background-color: ${theme.colors.backgroundPrimary};
+    border: 1px solid ${theme.colors.colorPrimaryOpacity};
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-top: -1px;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: ${theme.colors.colorPrimary};
+    font-size: 16px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+
+    :hover {
+      box-shadow: 0px 1px 2px ${theme.colors.colorPrimary};
     }
   `,
   BoxLogoAndTitle: styled.div`
@@ -75,7 +131,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
   `,
   BoxLogoHeader: styled.div`
     display: flex;

@@ -1,22 +1,72 @@
 import React, {useState, useEffect} from 'react'
+import dayjs from 'dayjs';
+
 import api from '../../service/api';
-
 import S from './styles';
-import { IArticlesDTO } from '../../Dtos/ArticlesDTO';
+import { IArticlesDTO, IContentArticlesPropsDTO } from '../../Dtos/ArticlesDTO';
+import BoxSearchInformation from '../BoxSearchInformation';
 
-const ContentArticles = () => {
+const ContentArticles = ({sendSearch, sendListOrder}: IContentArticlesPropsDTO) => {
 
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState<number>(1)
   const [dataArticles, setDataArticles] = useState<IArticlesDTO[]>([]);
+  const [buttonSearch, setButtonSearch] = useState<boolean>(true);
+  const [boxInformation, setBoxInformation] = useState<boolean>(false);
 
   useEffect(() => {
     getDataArticles();
   }, []);
 
+  useEffect(() => {
+    if(sendSearch.length > 2) {
+      setLoading(true);
+      setDataArticles([]);
+      const getSearchArticles = async () => {
+        const {data} = await api.get(`/articles/${sendSearch}`);
+        if(data.length > 0) {
+          setBoxInformation(false);
+          setLoading(false);
+          setDataArticles(data);
+          setButtonSearch(false);
+          return;
+        }
+          setBoxInformation(true);
+          setLoading(false);
+      }
+      getSearchArticles();
+    } else {
+      setButtonSearch(true);
+      getDataArticles();
+      setBoxInformation(false);
+    }
+  }, [sendSearch]);
+
+  useEffect(() => {
+    const getOrderSelectedArticle = async () => {
+      setLoading(true);
+      setDataArticles([]);
+      if(sendListOrder === 'asc') {
+        const {data} = await api.get(`/articles/?_order=-1`);
+        if(data.length > 0) {
+          setLoading(false);
+          setDataArticles(data);
+        return;
+        }
+      }
+      const {data} = await api.get(`/articles/?_order=1`);
+        if(data.length > 0) {
+          setLoading(false);
+          setDataArticles(data);
+        return;
+        }
+    }
+    
+    getOrderSelectedArticle();
+  }, [sendListOrder]);
+
   const getDataArticles = async () => {
     const {data} = await api.get('/articles');
-
     if(data) {
       setDataArticles(data);
     }
@@ -24,7 +74,6 @@ const ContentArticles = () => {
   }
 
   const handleLoadPlusArticles = async (page: number) => {
-
     setLoading(true);
     let count = page + 1;
 
@@ -39,11 +88,13 @@ const ContentArticles = () => {
     }
   }
 
-
   return (
     <S.Container>
       <S.BoxContent>
 
+      {boxInformation &&
+        <BoxSearchInformation />
+      }
       {dataArticles.length > 0 && dataArticles.map((item, index) => {
 
         let verifyPositionCard = false;
@@ -62,7 +113,7 @@ const ContentArticles = () => {
                 {item.title.length > 70 ? '...' : '.'}
               </S.TextTitle>
               <S.BoxDateAndButton>
-                <S.TextData>{item.publishedAt} {verifyPositionCard}</S.TextData>
+                <S.TextData>{dayjs(item.publishedAt).format('DD/MM/YYYY')}</S.TextData>
                 <S.ButtonNewSite>
                   New Site
                 </S.ButtonNewSite>
@@ -84,9 +135,11 @@ const ContentArticles = () => {
           <S.IconloadArticles src='loading.gif' />
         }
 
-        <S.ButtonPlusArticles onClick={() => handleLoadPlusArticles(pageLoading)}>
-          Carregar Mais
-        </S.ButtonPlusArticles>
+        {buttonSearch &&
+          <S.ButtonPlusArticles onClick={() => handleLoadPlusArticles(pageLoading)}>
+            Carregar Mais
+          </S.ButtonPlusArticles>
+        }
       </S.BoxButtonLoad>     
 
       </S.BoxContent>

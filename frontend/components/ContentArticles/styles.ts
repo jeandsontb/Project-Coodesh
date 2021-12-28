@@ -66,7 +66,8 @@ export default {
     background-color: ${theme.colors.colorActive};
     color: ${theme.colors.backgroundPrimary};
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
+    margin-top: 2px;
     cursor: pointer;
 
     :hover {
